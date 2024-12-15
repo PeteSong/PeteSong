@@ -1,0 +1,55 @@
+" .ideavimrc is a configuration file for IdeaVim plugin. It uses
+"   the same commands as the original .vimrc configuration.
+" You can find a list of commands here: https://jb.gg/h38q75
+" Find more examples here: https://jb.gg/share-ideavimrc
+" Reference: https://github.com/JetBrains/ideavim/discussions/303
+
+" Source your .vimrc
+source ~/.vimrc
+
+
+"" -- Suggested options --
+" Show a few lines of context around the cursor. Note that this makes the
+" text scroll if you mouse-click near the start or end of the window.
+set scrolloff=5
+"" Do incremental searching.
+set incsearch
+"" Don't use Ex mode, use Q for formatting.
+map Q gq
+
+" --- Enable IdeaVim plugins https://jb.gg/ideavim-plugins
+set easymotion
+set ideajoin
+
+
+"" Highlight copied text
+Plug 'machakann/vim-highlightedyank'
+
+
+"" -- Map IDE actions to IdeaVim -- https://jb.gg/abva4t
+map <leader><leader>f <Plug>(easymotion-sn)
+
+map <leader>ga <Action>(GotoAction)
+map <leader>gs <Action>(Switcher)
+map <leader>gc <Action>(GotoClass)
+map <leader>gf <Action>(GotoFile)
+map <leader>fp <Action>(FindInPath)
+map <leader>fs <Action>(FileStructurePopup)
+map <leader>z <Action>(ToggleDistractionFreeMode)
+
+map <leader>r <Action>(RunClass)
+map <leader><leader>r <Action>(RenameElement)
+"map <leader>d <Action>(Debug)
+
+
+map \b <Action>(Back)
+map \f <Action>(Forward)
+
+"map \r <Action>(ReformatCode)
+"map \o <Action>(OptimizeImports)
+
+map == <Action>(ReformatCode)
+map -- <Action>(OptimizeImports)
+
+"vnoremap / :action Find<CR>
+"nnoremap / :action Find<CR>

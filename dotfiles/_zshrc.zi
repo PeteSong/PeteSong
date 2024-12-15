@@ -1,0 +1,30 @@
+if [[ -r "/Users/pete/.config/zi/init.zsh" ]]; then
+  source "/Users/pete/.config/zi/init.zsh" && zzinit
+fi
+
+
+### User configuration
+
+zi snippet OMZ::lib/completion.zsh
+zi snippet OMZ::lib/history.zsh
+zi snippet OMZ::lib/async_prompt.zsh
+zi snippet OMZ::lib/git.zsh
+zi snippet OMZ::lib/key-bindings.zsh
+zi snippet OMZ::lib/theme-and-appearance.zsh
+
+zi snippet OMZ::plugins/git/git.plugin.zsh
+zi snippet OMZ::plugins/extract/extract.plugin.zsh
+zi snippet OMZ::plugins/colored-man-pages/colored-man-pages.plugin.zsh
+
+zi snippet OMZ::themes/robbyrussell.zsh-theme
+
+zi light zsh-users/zsh-completions
+zi light zsh-users/zsh-autosuggestions
+zi light Aloxaf/fzf-tab
+zi light zdharma-continuum/fast-syntax-highlighting
+#zi light z-shell/F-Sy-H
+
+
+# zsh-autosuggestions
+bindkey '`' autosuggest-accept
+

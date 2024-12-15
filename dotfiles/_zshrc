@@ -1,0 +1,6 @@
+export https_proxy=127.0.0.1:7897
+
+source ${HOME}/.zshrc.zi
+#source ${HOME}/.zshrc.oh-my-zsh
+
+source ${HOME}/.env.sh

@@ -1,0 +1,366 @@
+" ============================================================================
+" My vimrc for vim and neo-vim
+" ============================================================================
+
+
+" Vim defaults
+unlet! skip_defaults_vim
+silent! source $VIMRUNTIME/defaults.vim
+
+" ============================================================================
+
+let g:is_win = (has('win16') || has('win32') || has('win64')) ? v:true : v:false
+let g:is_linux = (has('unix') && !has('macunix')) ? v:true : v:false
+let g:is_mac = (has('macunix') || has('mac')) ? v:true : v:false
+
+let g:is_nvim = has('nvim') ? v:true : v:false
+let g:is_gui = has('gui_running') ? v:true : v:false
+let g:is_gui_macvim = has('gui_macvim') ? v:true : v:false
+
+let g:python3_host_prog = '~/.pyenv/shims/python3'
+
+" With a map leader it's possible to do extra key combinations
+let mapleader=" "
+let g:mapleader=" "
+
+let g:loaded_perl_provider     = 0
+let g:loaded_ruby_provider     = 0
+let g:loaded_zipPlugin         = 1
+let g:loaded_zip               = 1
+let g:loaded_tarPlugin         = 1
+let g:loaded_tar               = 1
+let loaded_gzip                = 1
+let g:loaded_tutor_mode_plugin = 1
+
+"let g:netrw_banner       = 0
+"let g:netrw_keepdir      = 0
+"let g:netrw_liststyle    = 3
+"let g:netrw_sort_options = 'i'
+let g:netrw_list_hide    = netrw_gitignore#Hide() . '.*\.swp$,.DS_Store,*/tmp/*,*.so,*.swp,*.zip,*.git,^\.\.\=/\=$'
+"let g:loaded_netrw       = 1
+"let g:loaded_netrwPlugin = 1
+
+
+" ============================================================================
+
+" vim plugin management tool
+" vim-plug https://github.com/junegunn/vim-plug
+" PlugInstall     " Install plugins
+" PlugUpdate      " Install or update plugins
+" PlugUpgrade     " upgrade vim-plug itself
+call plug#begin('~/.vim/plugged')
+
+    "Plug 'morhetz/gruvbox'
+    Plug 'lifepillar/vim-gruvbox8'
+    Plug 'rafi/awesome-vim-colorschemes'
+
+    Plug 'mechatroner/rainbow_csv'
+    nnoremap <leader>fdt :set ft=csv_semicolon<CR> <bar> :RainbowAlign<CR>
+
+    " git wrapper
+    Plug 'tpope/vim-fugitive'
+
+    " [count]|<Leader>|cc |NERDCommenterComment|
+    " Comment out the current line or text selected in visual mode.
+    Plug 'preservim/nerdcommenter'
+
+    " code.amazon.com
+    " Plug 'ssh://git.amazon.com:2222/pkg/Vim-code-browse', {'branch': 'mainline'}
+    "GBrowse
+
+    " status line
+    Plug 'itchyny/lightline.vim'
+
+    Plug 'mhinz/vim-startify'
+
+    Plug 'airblade/vim-current-search-match'
+
+    " :h ins-completion
+    Plug 'ervandew/supertab'
+
+    Plug 'easymotion/vim-easymotion'
+    " Turn on case-insensitive feature
+    let g:EasyMotion_smartcase = 1
+    nmap s <Plug>(easymotion-s2)
+    nmap <leader>s <Plug>(easymotion-sn)
+
+    " Plug 'fladson/vim-kitty'
+
+    Plug 'plasticboy/vim-markdown'
+    let g:vim_markdown_folding_disabled = 1
+    let g:vim_markdown_strikethrough = 1
+    let g:vim_markdown_math = 1
+    let g:vim_markdown_folding_style_pythonic = 1
+    let g:vim_markdown_toc_autofit = 1
+    let g:vim_markdown_json_frontmatter = 1
+    let g:vim_markdown_no_extensions_in_markdown = 1
+    let g:vim_markdown_edit_url_in = 'tab'
+    set conceallevel=2
+
+    Plug 'vim-scripts/ReplaceWithRegister'
+
+    Plug 'Yggdroot/LeaderF', { 'do': ':LeaderfInstallCExtension' }
+    let g:Lf_PythonVersion=3
+    let g:Lf_PopupWidth=0.9
+    let g:Lf_WindowPosition='popup'
+    let g:Lf_PreviewInPopup=1
+    let g:Lf_ShowDevIcons=0
+    let g:Lf_ExternalCommand='fd -t f "%s" '
+    "let g:Lf_CommandMap={'<C-K>': ['<Up>'], '<C-J>': ['<Down>']}
+    let g:Lf_WildIgnore={
+        \ 'dir': ['.git', '__pycache__', '.DS_Store'],
+        \ 'file': ['*.exe', '*.dll', '*.so', '*.o', '*.pyc', '*.jpg', '*.png', '*.bak',
+        \          '*.gif', '*.svg', '*.ico', '*.db', '*.tgz', '*.tar.gz', '*.gz',
+        \          '*.zip', '*.bin', '*.pptx', '*.xlsx', '*.docx', '*.pdf', '*.tmp',
+        \          '*.wmv', '*.mkv', '*.mp4', '*.rmvb', '*.ttf', '*.ttc', '*.otf',
+        \          '*.mp3', '*.aac']
+        \}
+    " <leader>f  "search file
+    " <leader>b  "search buffer
+    nnoremap <leader>l  :LeaderfLine<CR>
+    nnoremap <leader>rg :Leaderf rg<CR>
+    nnoremap <leader>ru :LeaderfMru<CR>
+
+    " The two plugs need to work together.
+    Plug 'ptzz/lf.vim'
+    Plug 'voldikss/vim-floaterm'
+    let g:lf_map_keys = 0
+    map <leader>lf :LfNewTab<CR>
+    
+    Plug 'yianwillis/vimcdoc'
+
+    Plug 'preservim/nerdtree'
+    "nnoremap <leader>n :NERDTreeFocus<CR>
+    nnoremap <leader>n :NERDTreeToggle<CR>
+    "nnoremap <C-n> :NERDTree<CR>
+    "nnoremap <C-t> :NERDTreeToggle<CR>
+    "nnoremap <C-f> :NERDTreeFind<CR>
+        
+call plug#end()
+
+
+" ============================================================================
+
+
+set nobackup
+set nofsync
+set nostartofline
+set noswapfile
+set nowritebackup
+set nowrapscan
+
+set ttyfast
+
+set encoding=utf-8
+set ambiwidth=double
+set fileencodings=ucs-bom,utf-8,cp936,cp18030,big5,euc-jp,euc-kr,latin1
+set fileformats=unix,dos,mac
+
+set complete=".,w,b,u,t"
+
+set expandtab smarttab shiftround
+set shiftwidth=4
+set softtabstop=4
+set tabstop=4
+
+set nowrap
+set showbreak=↪
+set whichwrap+=<,>,[,]
+
+set matchpairs+=<:>,「:」,『:』,【:】,“:”,‘:’,《:》
+
+set autoread
+"set cursorline
+set autoindent smartindent
+set number "relativenumber
+set ignorecase hlsearch incsearch " smartcase 
+
+set wildignore+=*.o,*.obj,*.dylib,*.bin,*.dll,*.exe
+set wildignore+=*/.git/*,*/.svn/*,*/__pycache__/*,*/build/**
+set wildignore+=*.jpg,*.png,*.jpeg,*.bmp,*.gif,*.tiff,*.svg,*.ico
+set wildignore+=*.pyc,*.pkl
+set wildignore+=*.DS_Store
+set wildignore+=*.aux,*.bbl,*.blg,*.brf,*.fls,*.fdb_latexmk,*.synctex.gz,*.xdv
+set wildignorecase
+
+set wildmenu
+set wildoptions=pum
+
+set belloff=all
+set foldcolumn=2
+set laststatus=2
+"set scrolloff=1
+set virtualedit=block
+
+set nolist
+set listchars=eol:$,tab:>-,trail:-,nbsp:+
+
+
+if g:is_mac
+    set clipboard^=unnamed
+else
+    set clipboard^=unnamedplus
+endif
+
+if g:is_gui
+    "set background=dark
+    set background=light
+    let g:gruvbox_bold = 1
+    let g:gruvbox_italics=1
+    let g:gruvbox_italicize_strings=1
+    let g:gruvbox_filetype_hi_groups = 1
+    let g:gruvbox_plugin_hi_groups = 1
+    colorscheme gruvbox8_hard
+
+    "set guifont=IntelOneMono-Regular:h14
+    set guifont=Courier_Prime:h15
+    "set guifont=FiraCode-Regular:h13
+    
+    "highlight CurSearch guibg=green
+endif
+
+if g:is_gui_macvim
+    set macligatures
+    set guioptions+=a
+    set guioptions+=k
+    set guioptions-=r
+    set guioptions-=R
+    set guioptions-=l
+    set guioptions-=L
+    set guioptions-=e "use non-GUI tab pages line
+    set guitablabel=%M%t\ \ %Ngt
+    set antialias
+endif
+
+if has('nvim')
+
+
+endif
+
+
+" relative path
+":let @+ = expand("%")
+
+" full path
+":let @+ = expand("%:p")
+
+" just filename
+":let @+ = expand("%:t")
+
+" ============================================================================
+
+
+
+" Disable highlight when <leader><CR> is pressed
+map <silent> <leader><CR> :nohlsearch<CR>
+
+" Switch CWD to the directory of the open buffer
+map <leader>cd :lcd %:p:h<CR>:pwd<CR>
+
+map 0 ^
+
+" Center screen when jumping to next match
+nnoremap n nzz
+nnoremap N Nzz
+vnoremap n nzz
+vnoremap N Nzz
+
+vnoremap < <gv
+vnoremap > >gv
+
+" move vertically by visual line
+nnoremap j gj
+nnoremap k gk
+nnoremap B ^
+nnoremap E $
+
+" Move a line of text using ALT+[jk] or Command+[jk] on mac
+nmap <M-j> mz:m+<CR>`z
+nmap <M-k> mz:m-2<CR>`z
+vmap <M-j> :m'>+<CR>`<my`>mzgv`yo`z
+vmap <M-k> :m'<-2<CR>`>my`<mzgv`yo`z
+
+inoremap <C-s>     <C-O>:update<CR>
+nnoremap <C-s>     :update<CR>
+nnoremap <leader>w :update<CR>
+
+inoremap <C-Q>     <ESC>:q<CR>
+nnoremap <C-Q>     :q<CR>
+vnoremap <C-Q>     <ESC>
+nnoremap <leader>q :q<CR>
+nnoremap <leader>qa :qa<CR>
+nnoremap <leader>Q :qa!<CR>
+
+map <leader>x :e ~/buffer.md<CR>
+
+" Remove the Windows ^M - when the encodings gets messed up
+noremap <leader>m mmHmt:%s/<C-V><CR>//ge<CR>'tzt'm
+
+" <tab> / <s-tab> | Circular windows navigation
+nnoremap <tab>   <c-w>w
+nnoremap <S-tab> <c-w>W
+
+" tab mapping
+map <leader>1 1gt
+map <leader>2 2gt
+map <leader>3 3gt
+map <leader>4 4gt
+map <leader>5 5gt
+nmap <C-1> <leader>1
+nmap <C-2> <leader>2
+nmap <C-3> <leader>3
+nmap <C-4> <leader>4
+nmap <C-5> <leader>5
+
+if has('mac')
+  nmap <D-1> <leader>1
+  nmap <D-2> <leader>2
+  nmap <D-3> <leader>3
+  nmap <D-4> <leader>4
+  nmap <D-5> <leader>5
+endif
+
+nnoremap ]t :tabn<CR>
+nnoremap [t :tabp<CR>
+
+" buffer mapping
+nnoremap <silent> bd :bdelete<CR>
+nnoremap ]b :bnext<CR>
+nnoremap [b :bprev<CR>
+
+" Change text without putting it into the vim register,
+nnoremap c "_c
+nnoremap C "_C
+nnoremap cc "_cc
+xnoremap c "_c
+
+": vim-powered terminal in split window
+map <Leader>t :term ++close<cr>
+tmap <Leader>t <c-w>:term ++close<cr>
+
+": vim-powered terminal in new tab
+map <Leader>T :tab term ++close<cr>
+tmap <Leader>T <c-w>:tab term ++close<cr>
+
+" ============================================================================
+
+
+function! s:colors(...)
+  return filter(map(filter(split(globpath(&rtp, 'colors/*.vim'), "\n"),
+        \                  'v:val !~ "^/usr/"'),
+        \           'fnamemodify(v:val, ":t:r")'),
+        \       '!a:0 || stridx(v:val, a:1) >= 0')
+endfunction
+
+function! s:rotate_colors()
+  if !exists('s:colors')
+    let s:colors = s:colors()
+  endif
+  let name = remove(s:colors, 0)
+  call add(s:colors, name)
+  execute 'colorscheme' name
+  redraw
+  echo name
+endfunction
+
+nnoremap <silent> <F8> :call <SID>rotate_colors()<CR>
